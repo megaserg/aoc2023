@@ -24,7 +24,8 @@ mkdir $NUM
 cp template.rs $NUM/a.rs
 cp template.toml $NUM/Cargo.toml
 sed -i '' -e "s/<NUMBER>/$NUM/g" $NUM/Cargo.toml
-# cd $NUM
+cd $NUM
+
 # TRIMNUM=$((10#$NUM))
 # curl -sL "https://adventofcode.com/2023/day/$TRIMNUM/input" > input.txt
 # rustc a.rs
