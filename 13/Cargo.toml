@@ -1,0 +1,13 @@
+[package]
+name = "aoc2023-13"
+version = "1.0.0"
+
+[dependencies]
+
+[[bin]]
+name = "a"
+path = "a.rs"
+
+[[bin]]
+name = "b"
+path = "b.rs"
