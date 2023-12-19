@@ -19,10 +19,19 @@ fn main() {
         let n = s.len();
         let m = xs.len();
 
+        let mut lon = vec![0; n + 1];
+        for i in (0..n).rev() {
+            if s[i] == '#' || s[i] == '?' {
+                lon[i] = lon[i + 1] + 1;
+            } else {
+                lon[i] = 0;
+            }
+        }
+
         // eprintln!("{:?}", s);
         // eprintln!("{:?}", xs);
 
-        let mut d: Vec<Vec<u64>> = vec![vec![0; m + 1]; n + 1];
+        let mut d = vec![vec![0; m + 1]; n + 1];
         d[0][0] = 1;
         for i in 0..n {
             for j in 0..=m {
@@ -34,26 +43,13 @@ fn main() {
                 }
                 if j < m && (c == '#' || c == '?') {
                     let l = xs[j];
-                    let mut mat = true;
-                    if i + l > n {
-                        // eprintln!("{i}, {j}: no match 1");
-                        mat = false;
-                    }
-                    if mat {
-                        for p in 0..l {
-                            if s[i + p] == '.' {
-                                // eprintln!("{i}, {j}: no match 2");
-                                mat = false;
-                                break;
-                            }
-                        }
-                    }
-                    if mat {
+                    if l <= lon[i] {
                         if i + l < n {
                             if s[i + l] == '.' || s[i + l] == '?' {
                                 d[i + l + 1][j + 1] += d[i][j];
                             }
                         } else {
+                            assert_eq!(i + l, n);
                             d[i + l][j + 1] += d[i][j];
                         }
                     }
