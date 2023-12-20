@@ -1,5 +1,3 @@
-mod b;
-
 use std::io;
 
 fn hash(s: &str) -> u32{
